@@ -1,0 +1,90 @@
+Getting started with Go
+Optum Ireland
+2 Nov 2018
+Tags: optum, europython, python, 2018
+
+Pietro Mascolo
+#Senior Data Scientist - Optum
+pietro_mascolo@optum.com
+@iz4vve
+
+*Slides*and*code*: [[https://bit.ly/2OcZThG]]
+
+
+###############################################################
+* What is Go?
+
+Go is a *compiled*, *concurrent*, *garbage-collected*, *statically*typed* language developed at Google.
+ 
+It is an open source project: Google imports the public repository rather than the other way around. 
+
+According to the Go team at Google:
+
+  The Go programming language was conceived in late 2007 as an answer to some of the problems 
+  we were seeing developing software infrastructure at Google. 
+  [...] 
+  The problems introduced by multicore processors, networked systems, 
+  massive computation clusters, and the web programming model were being worked around 
+  rather than addressed head-on. 
+  Moreover, the scale has changed: today's server programs comprise tens of millions 
+  of lines of code, are worked on by hundreds or even thousands of programmers, 
+  and are updated literally every day. 
+  To make matters worse, build times, even on large compilation clusters, have stretched 
+  to many minutes, even hours. 
+
+
+###############################################################
+* Language Semantics
+
+.html code/spacer.html
+.html code/spacer.html
+
+
+- C-like syntax;
+- No pointer arithmetic;
+- No implicit numeric conversions;
+- there are no type aliases (after '`type`X`int`', `X` and `int` are distinct types);
+- ...
+
+
+###############################################################
+* Some key features
+
+.html code/spacer.html
+.html code/spacer.html
+
+
+- Concurrency support out of the box (no libraries needed);
+- garbage collection and no manual memory management (unless you use the `unsafe` package);
+- interface types provide runtime polymorphism;
+- reflection;
+- type switches.
+
+###############################################################
+* The syntax
+
+###############################################################
+* Declaring variables
+
+.play code/go/variables.go
+
+
+###############################################################
+* Data structures
+
+Go is very simple: it only gives you 3 data structures (for efficiency, you rarely need more):
+
+- arrays;
+- slices;
+- maps.
+
+###############################################################
+* Structs
+
+Used to define more complex data structures (useful to group logical concepts).
+
+    type MyStruct struct {
+        ID string
+        aNumber int
+        aBool bool
+    }
