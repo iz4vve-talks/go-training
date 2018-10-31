@@ -231,6 +231,28 @@ Go only has a for loop!!
       // runs forever
   }
 
+* Loop with `range`
+
+    // loop over a slice/array
+    for index, item := range l {
+        // do something
+    }
+
+    // loop over a map
+    for key, value := range m {
+        // do something
+    }
+
+    // only key/index
+    for i := range x {
+        // do something
+    }
+
+    // range over a channel (more on this later)
+    for v := range ch {
+        // do something
+    }
+
 ###############################################################
 * Pointers 1/2
 
@@ -275,17 +297,75 @@ Typical use:
 ###############################################################
 * Interfaces
 
-###############################################################
-* Concurrency
+They provide runtime polymorphism by describing behaviours through the methods a type is required to have.
+
+Keep your interfaces small and specific:
+
+*DO*
+
+    type Reader {
+        Read(p []byte) (int, error)
+    }
+
+*DON'T*
+
+    type FileReader interface {
+        Create(name string) (*File, error)
+        NewFile(fd uintptr, name string) *File
+        Open(name string) (*File, error)
+        OpenFile(name string, flag int, perm FileMode) (*File, error)
+    }
+
+: Reader can represent any type that can be read (a file, stdout, a network connection, ...).
+: Filereader is not very useful: it's exactly the signature of the `os.File` type...
 
 ###############################################################
-* Concurrency model (CSP)
+* Concurrency - the model (CSP)  1/2
+
+.html code/spacer.html
+.html code/spacer.html
+.image imgs/processes.jpeg _ 700
+
+###############################################################
+* Concurrency - in Go  2/2
+
+.image imgs/concurrency.jpg _ 950
 
 ###############################################################
 * Goroutines
 
+Goroutines are essentially lightweight threads. They are designed so that thousands of them can act concurrently on a single system.
+
+The function:
+.code code/go/goroutines.go /START FUNC OMIT/,/END FUNC OMIT/
+
+How to launch:
+.play code/go/goroutines.go /START MAIN OMIT/,/END MAIN OMIT/
+
+: Initial stack is 2Kb, as oppoed to 4Mb for normal threads
+: their stack size can increase/decrease based on necessity.
+
 ###############################################################
-* Channels
+* Channels 1/2
+
+Channels are a typed conduit through which you can send and receive values with the channel operator, `<-`.
+
+    ch <- v    // Send v to channel ch.
+    v := <-ch  // Receive from ch, and
+               // assign value to v.
+
+The data flows in the direction of the arrow.
+Like maps and slices, channels must be created before use:
+
+    ch := make(chan int)
+
+By default, sends and receives block until the other side is ready. This allows goroutines to synchronize without explicit locks or condition variables. 
+
+###############################################################
+* Channels - Buffered/Unbuffered 2/2
+
+.image imgs/channels.jpg _ 950
+
 
 ###############################################################
 * Tooling
@@ -304,6 +384,27 @@ Typical use:
 * Benchmark - comparison (3/3)
 .html code/spacer.html
 .play code/benchmark/run_benchmark.sh
+
+
+###############################################################
+* Go Proverbs (useful/interesting in any language)
+
+.html code/spacer.html
+.html code/spacer.html
+
+    Don't communicate by sharing memory, share memory by communicating.
+    Concurrency is not parallelism.
+    The bigger the interface, the weaker the abstraction.
+    interface{} says nothing.
+    Gofmt's style is no one's favorite, yet gofmt is everyone's favorite.
+    A little copying is better than a little dependency.
+    Clear is better than clever.
+    Reflection is never clear.
+    Errors are values.
+    Don't just check errors, handle them gracefully.
+    Design the architecture, name the components, document the details.
+    Documentation is for users.
+    Don't panic.
 
 ###############################################################
 * Demos
