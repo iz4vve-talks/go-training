@@ -100,9 +100,21 @@ The program can then be run:
 
 Go is very simple: it only gives you 3 data structures (for efficiency, you rarely need more):
 
-- arrays;
-- slices;
-- maps.
+- *arrays* (fixed size, immutable);
+
+    array := [4]int{1, 2, 3, 4} 
+
+- *slices* (size not defined, they have a capacity);
+
+    slice := []int{1, 2, 3, 4, 5, 6}
+    slice1 := make([]int, 10)  // 10 is the capacity for allocation
+
+- *maps*.
+
+    m := map[string]int{
+        "one": 1,
+        "two": 2,
+    }
 
 ###############################################################
 * Functions 1/2
@@ -146,9 +158,9 @@ A typical function in Go returns a value and an error object (more on this in er
 
 Used to define more complex data structures (useful to group logical concepts).
 
-: We can use the struct literal form to initialize a value from a struct type.
-: The dot (.) operator allows us to access individual field values.
-: We can create anonymous structs.
+#: We can use the struct literal form to initialize a value from a struct type.
+#: The dot (.) operator allows us to access individual field values.
+#: We can create anonymous structs.
 
     // Documentation...
     type Employee struct {
