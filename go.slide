@@ -1,4 +1,4 @@
-Getting started with Go
+Let's Go!
 Optum Ireland
 2 Nov 2018
 Tags: optum, europython, python, 2018
@@ -79,12 +79,98 @@ Go is very simple: it only gives you 3 data structures (for efficiency, you rare
 - maps.
 
 ###############################################################
+* Functions 1/2
+
+.html code/spacer.html
+
+Functions are introduced by the keyword `func`.
+
+    // documentation...
+    func add(x int, y int) int {
+        return x + y
+    }
+
+    // function with named return
+    func named(x int, y int) (sum int) {
+        sum = x + y
+        // sum is specified as the return variable in the function signature
+        return
+    }
+
+* Functions 2/2
+
+.html code/spacer.html
+
+A typical function in Go returns a value and an error object (more on this in error handling)
+
+    func doSomething(x io.Reader) ([]byte, error) {
+        if !everythingsOk() {
+            return []byte{}, errors.New("Damn!")
+        }
+
+        ...
+        // happy return
+        return ret, nil
+    }
+
+###############################################################
 * Structs
+
+.html code/spacer.html
 
 Used to define more complex data structures (useful to group logical concepts).
 
-    type MyStruct struct {
-        ID string
-        aNumber int
-        aBool bool
+: We can use the struct literal form to initialize a value from a struct type.
+: The dot (.) operator allows us to access individual field values.
+: We can create anonymous structs.
+
+    // Documentation...
+    type Employee struct {
+        EmployeeID string
+        Name       string
+        LastName   string
+        age        int     // unexported (private)
+        salary     int     // unexported (private)
     }
+
+    
+
+###############################################################
+* Pointers
+
+###############################################################
+* Error handling
+
+###############################################################
+* Control flow
+
+###############################################################
+* Loop (yeah, there is only one...)
+
+###############################################################
+* Concurrency
+
+###############################################################
+* Concurrency model (CSP)
+
+###############################################################
+* Goroutines
+
+###############################################################
+* Channels
+
+###############################################################
+* Why Go?
+
+* Benchmark - Go (1/3)
+.code code/benchmark/go_bench.go
+
+* Banchmark - Python (2/3)
+.code code/benchmark/python_bench.py
+
+* Benchmark - comparison (3/3)
+.play code/benchmark/run_benchmark.sh
+
+###############################################################
+* Demos
+    
