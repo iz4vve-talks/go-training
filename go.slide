@@ -64,6 +64,32 @@ According to the Go team at Google:
 * The syntax
 
 ###############################################################
+* Hello, World!
+
+  package main
+
+  import "fmt"
+
+  func main() {
+      fmt.Println("Hello, World!")
+  }
+
+The program can then be run:
+
+  # direct run
+  $ go run hello-world.go
+  Hello, World!
+
+  # compilation
+  $ go build hello-world.go
+  $ ls
+  hello-world   hello-world.go
+  
+  # execution
+  $ ./hello-world
+  Hello, World!
+
+###############################################################
 * Declaring variables
 
 .play code/go/variables.go
@@ -133,19 +159,109 @@ Used to define more complex data structures (useful to group logical concepts).
         salary     int     // unexported (private)
     }
 
+###############################################################
+* Control flow 1/2
+
+Go has two main control flow statements:
+
+*if/else* (generic control flow):
+
+    if 7%2 == 0 {
+        fmt.Println("7 is even")
+    } else {
+        fmt.Println("7 is odd")
+    }
+
+
+* Control flow 2/2
+
+*switch* (specific set of cases, type assertions, ...):
     
+    i := 2
+    fmt.Print("Write ", i, " as ")
+    switch i {
+    case 1:
+        fmt.Println("one")
+    case 2:
+        fmt.Println("two")
+    }
+    
+    // type assertions
+
+    whatAmI := func(i interface{}) {
+        switch t := i.(type) {
+        case bool:
+            fmt.Println("I'm a bool")
+        case int:
+            fmt.Println("I'm an int")
+        default:
+            fmt.Printf("Don't know type %T\n", t)
+        }
+    }
 
 ###############################################################
-* Pointers
+* Loop (yeah, there is only one...)
+
+Go only has a for loop!!
+
+  // C style
+  for i := 0; i < 10; i++ {
+      // do something
+  }
+
+  // while style
+  for i < 10 {
+      i++
+  }
+
+  // while true
+  for {
+      // runs forever
+  }
+
+###############################################################
+* Pointers 1/2
+
+.image  imgs/pointers.PNG _ 700
+
+* Pointer 2/2
+
+.html code/spacer.html
+
+Syntax
+
+    // getting memory address of a variable
+    a := 10
+    addr := &a  // addr is of type *int
+
+    // dereferencing a pointer (get the value)
+    valueOfA := *addr
+    
 
 ###############################################################
 * Error handling
 
-###############################################################
-* Control flow
+The error type is an interface type (more on this later). An error variable represents any value that can describe itself as a string. Here is the interface's declaration: 
+
+    type error interface {
+        Error() string
+    }
+
+Go doesn't really have exceptions (with some exceptions...), instead it uses the error type to handle problematic situations.
+
+Typical use:
+
+    result, err := functionThatCanFail()
+    if err != nil {
+        // handle the error (and exit/fail)
+    }
+    continueIfNoError()
 
 ###############################################################
-* Loop (yeah, there is only one...)
+* Advanced topics
+
+###############################################################
+* Interfaces
 
 ###############################################################
 * Concurrency
@@ -158,6 +274,9 @@ Used to define more complex data structures (useful to group logical concepts).
 
 ###############################################################
 * Channels
+
+###############################################################
+* Tooling
 
 ###############################################################
 * Why Go?
@@ -176,4 +295,13 @@ Used to define more complex data structures (useful to group logical concepts).
 
 ###############################################################
 * Demos
-    
+
+- Job dispatcher
+- ...
+
+###############################################################
+* Resources
+
+- gobyexample.com
+- tour.golang.org
+- golang.org/doc/effective_go.html
