@@ -1,14 +1,14 @@
 package main
 
 import (
-	"flag"
+	"os"
+	"strconv"
 )
 
 func main() {
-	count := flag.Int("i", 100000000, "count")
-	flag.Parse()
+	count, _ := strconv.Atoi(os.Args[1])
 
-	for i := 0; i < *count; i++ {
-
+	for i := 0; i < count; i++ {
+		// do nothing
 	}
 }

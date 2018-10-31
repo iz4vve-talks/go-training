@@ -163,12 +163,15 @@ Used to define more complex data structures (useful to group logical concepts).
 * Why Go?
 
 * Benchmark - Go (1/3)
+.html code/spacer.html
 .code code/benchmark/go_bench.go
 
 * Banchmark - Python (2/3)
+.html code/spacer.html
 .code code/benchmark/python_bench.py
 
 * Benchmark - comparison (3/3)
+.html code/spacer.html
 .play code/benchmark/run_benchmark.sh
 
 ###############################################################
