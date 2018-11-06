@@ -171,6 +171,12 @@ Used to define more complex data structures (useful to group logical concepts).
         salary     int     // unexported (private)
     }
 
+Structs can also have methods:
+
+    func (e Employee) FullName() string {
+        return e.Name + " " + e.LastName
+    }
+
 ###############################################################
 * Control flow 1/2
 
@@ -316,8 +322,8 @@ Keep your interfaces small and specific:
         OpenFile(name string, flag int, perm FileMode) (*File, error)
     }
 
-: Reader can represent any type that can be read (a file, stdout, a network connection, ...).
-: Filereader is not very useful: it's exactly the signature of the `os.File` type...
+#: Reader can represent any type that can be read (a file, stdout, a network connection, ...).
+#: Filereader is not very useful: it's exactly the signature of the `os.File` type...
 
 ###############################################################
 * Concurrency - the model (CSP)  1/2
@@ -342,8 +348,8 @@ The function:
 How to launch:
 .play code/go/goroutines.go /START MAIN OMIT/,/END MAIN OMIT/
 
-: Initial stack is 2Kb, as oppoed to 4Mb for normal threads
-: their stack size can increase/decrease based on necessity.
+#: Initial stack is 2Kb, as oppoed to 4Mb for normal threads
+#: their stack size can increase/decrease based on necessity.
 
 ###############################################################
 * Channels 1/2
@@ -369,6 +375,15 @@ By default, sends and receives block until the other side is ready. This allows 
 
 ###############################################################
 * Tooling
+
+- `gofmt` code formatting;
+- `go`vet` linter, code analysis (useless assignements, mystakes with `sync/atomic`, unreachable code, ...);
+- `go`test` testing framework (includes filters for tests, data race checks, coverage profile, ...);
+- `go`tool`cover` code coverage;
+- `go`get` dependency management;
+- `go`build` compiler.
+
+and many more (official and third parties)...
 
 ###############################################################
 * Why Go?
